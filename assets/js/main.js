@@ -1,67 +1,126 @@
-// Captura de Formulario
-const form = document.querySelector('#form');
+const resultado = document.querySelector('.container h1');
+const data = new Date();
 
-// Previnimos o evento Detault
-form.addEventListener('submit', function (e){
-e.preventDefault();
 
-const inputPeso = e.target.querySelector('.peso');
-const inputAltura = e.target.querySelector('.altura')
+function diaTexto (diaSemana){
+   
+    let diaEscrito;
 
-const peso = Number(inputPeso.value);
-const altura = Number(inputAltura.value);
+    switch (diaSemana){
+        case 0:
+            diaEscrito = 'Domingo';
+            return diaEscrito;
+            case 1:
+                diaEscrito = 'Segunda-Feira';
+                return diaEscrito;
+                case 2:
+                    diaEscrito = 'Terça-Feira';
+                    return diaEscrito;
+                    case 3:
+                        diaEscrito = 'Quarta-Feira';
+                        return diaEscrito;
+                        case 4:
+                            diaEscrito = 'Quinta-Feira';
+                            return diaEscrito;
+                            case 5:
+                                diaEscrito = 'Sexta-Feira';
+                                return diaEscrito;
+                                case 6:
+                                    diaEscrito = 'Sabado';
+                                    return diaEscrito;
+                                     }
+                                                            
+                        
+    }
+ 
 
-if (!peso){
-    msgResultado('Peso invalido', false);
-    return;
-}
-if (!altura){
-    msgResultado('Altura invalida', false);
-    return;
-}
+    function diaNumero(numeroDia){
+        return numeroDia;
+         }
 
-const imc = gitImc(peso, altura);
-const nivelImc = getNivelImc(imc); 
+        function escritaMes (mesEscrito){
+   
+            let mes;
+        
+            switch (mesEscrito){
+                case 0:
+                    mes = 'janeiro';
+                    return mes;
+                    case 1:
+                        mes = 'fevereiro';
+                        return mes;
+                        case 2:
+                            mes = 'março';
+                            return mes;
+                            case 3:
+                                mes = 'abril';
+                                return mes;
+                                case 4:
+                                    mes = 'maio';
+                                    return mes;
+                                    case 5:
+                                        mes = 'junho';
+                                        return mes;
+                                        case 6:
+                                            mes = 'julho';
+                                            return mes;
+                                            case 7:
+                                                mes = 'agosto';
+                                                return mes;
+                                                 case 8:
+                                                mes = 'setembro';
+                                                return mes; 
+                                                case 9:
+                                                mes = 'outubro';
+                                                return mes; 
+                                                case 10:
+                                                mes = 'novembro';
+                                                return mes; 
+                                                case 11:
+                                                mes = 'dezembro';
+                                                return mes;
+                                             }
+                                                                    
+                                
+            }
 
-const msg = `Seu IMC é ${imc} (${nivelImc}).`;
-msgResultado(msg, true)
-});
+           function anoNumero(data){
+            return data.getFullYear();
+           }
 
-function getNivelImc (imc){
-const nivel = ['Abaixo do peso', 'Peso normal', 'Sobrepeso', 
-'Obesidade grau 1', 'Obesidade grau 2', 'Obesidade grau 3'];
+           function hora (data){
+            return data.getHours();
+           }
 
-if (imc >= 39.9) return nivel[5];
-if (imc >= 34.9) return nivel[4];
-if (imc >= 29.9) return nivel[3];
-if (imc >=24.9)  return nivel[2];
-if (imc >= 18.5) return nivel[1];
-if (imc < 18.5)  return nivel[0];
+           function minutos(tempoMinuto){
+            
+            if ( tempoMinuto <= 9){
+               return '0' + tempoMinuto;
+            } 
+            else {
+                tempoMinuto;
+            }
+            return tempoMinuto;
+           }
 
-}
+       
 
-function gitImc (peso,altura) {
-const imc = peso /altura**2;
-return imc.toFixed(2);
-}
 
-function criaP () {
-    const p = document.createElement('p');
-    return p;
-}
+const diaSemana = data.getDay(); // Possui Function
 
-function msgResultado(msg, isValid){
-    const resultado = document.querySelector('#resultado');
-    resultado.innerHTML = '';
+const numeroDia = data.getDate(); // Possui Function
 
-    const p = criaP();
+const mesEscrito = data.getMonth(); // Possui Function 
 
-    if (isValid) {
-        p.classList.add('paragrafo-resultado');
-     } else {
-        p.classList.add('bad');
-     }
+const tempoMinuto = data.getMinutes(); 
 
-    p.innerHTML = msg;
-    resultado.appendChild(p);
-};
+anoNumero(data);
+
+hora(data);
+
+
+
+
+
+
+resultado.innerHTML = `${diaTexto (diaSemana)} , ${diaNumero(numeroDia)} de ${escritaMes (mesEscrito)}  de ${anoNumero(data)} <br> ${hora(data)}:${minutos(tempoMinuto)} </br>`;
